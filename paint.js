@@ -2,7 +2,6 @@ function GetContext() {
   return document.getElementById("canvas").getContext("2d"); 
 }   
 
-var radiusSupported = false;
 var nextCount = 0;
 var touchMap = {};
 var pointMode = (window.location.hash == "#points");
@@ -87,7 +86,7 @@ function drawTouches(touches, eventType) {
     context.save();
     context.translate(touch.pageX * scale, touch.pageY * scale);
     context.rotate(rotationAngle);
-    context.scale(radiusY/radiusX, 1);
+    context.scale(1, radiusY/radiusX);
     context.beginPath();
     context.arc(0, 0, radiusX, 0, 2.0 * Math.PI, false);
     context.closePath();
@@ -116,12 +115,12 @@ function drawTouches(touches, eventType) {
       context.lineWidth = 1;
       context.beginPath();
       if (radiusX >= radiusY) {
-        context.moveTo(0, -radiusX);
-        context.lineTo(0, radiusX);
-      } else {
-        // Note that this is also radiusX, because of the scaling above
         context.moveTo(-radiusX, 0);
         context.lineTo(radiusX, 0);
+      } else {
+        // Note that this is also radiusX, because of the scaling above
+        context.moveTo(0, -radiusX);
+        context.lineTo(0, radiusX);
       }
       context.stroke();
     }
