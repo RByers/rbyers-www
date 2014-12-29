@@ -2,7 +2,6 @@ function GetContext() {
   return document.getElementById("canvas").getContext("2d"); 
 }   
 
-var radiusSupported = false;
 var nextCount = 0;
 var touchMap = {};
 var pointMode = (window.location.hash == "#points");
